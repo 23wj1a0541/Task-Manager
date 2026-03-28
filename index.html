@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager - GitHub Copilot Dev Days</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-title">
+                    <h1>📋 Task Manager</h1>
+                    <p class="subtitle">Stay organized with your personal task list</p>
+                </div>
+                <div class="header-actions">
+                    <button id="themeToggleBtn" class="btn btn-icon-large" aria-label="Toggle dark/light mode" title="Toggle theme">
+                        🌙
+                    </button>
+                    <button id="helpBtn" class="btn btn-icon-large" aria-label="Show keyboard shortcuts" title="Keyboard shortcuts (?)">
+                        ?
+                    </button>
+                    <button id="downloadBtn" class="btn btn-secondary" aria-label="Download tasks as text file" title="Download tasks">
+                        ⬇️ Download
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="app-main">
+            <!-- Task Input Section -->
+            <section class="input-section card">
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        id="taskInput" 
+                        class="task-input" 
+                        placeholder="Add a new task..."
+                        aria-label="Task title"
+                    >
+                    <input 
+                        type="date" 
+                        id="dueDateInput" 
+                        class="due-date-input" 
+                        aria-label="Task due date (optional)"
+                    >
+                    <select id="prioritySelect" class="priority-select" aria-label="Task priority">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                    <select id="categorySelect" class="category-select" aria-label="Task category">
+                        <option value="">No Category</option>
+                        <option value="work">Work</option>
+                        <option value="personal">Personal</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="health">Health</option>
+                    </select>
+                    <button id="addBtn" class="btn btn-primary" aria-label="Add task">
+                        Add Task
+                    </button>
+                </div>
+            </section>
+
+            <!-- Task Stats Section -->
+            <section class="stats-section card">
+                <div class="stat-item">
+                    <span class="stat-label">Progress</span>
+                    <span id="taskCounter" class="stat-value">0 of 0</span>
+                </div>
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+            </section>
+
+            <!-- Category Filter Tabs -->
+            <section class="category-filter-section">
+                <button class="category-filter-btn active" data-category="">
+                    All Categories
+                </button>
+                <button class="category-filter-btn" data-category="work">
+                    💼 Work
+                </button>
+                <button class="category-filter-btn" data-category="personal">
+                    👤 Personal
+                </button>
+                <button class="category-filter-btn" data-category="shopping">
+                    🛒 Shopping
+                </button>
+                <button class="category-filter-btn" data-category="health">
+                    💚 Health
+                </button>
+            </section>
+
+            <!-- Filter Tabs -->
+            <section class="filter-section">
+                <button class="filter-btn active" data-filter="all">
+                    All
+                </button>
+                <button class="filter-btn" data-filter="active">
+                    Active
+                </button>
+                <button class="filter-btn" data-filter="completed">
+                    Completed
+                </button>
+            </section>
+
+            <!-- Search Bar -->
+            <section class="search-section">
+                <div class="search-input-wrapper">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-input" 
+                        placeholder="Search tasks..."
+                        aria-label="Search tasks by title"
+                    >
+                    <button id="clearSearchBtn" class="search-clear-btn" aria-label="Clear search" title="Clear">
+                        ✕
+                    </button>
+                </div>
+            </section>
+
+            <!-- Task List -->
+            <section class="task-list-section card">
+                <div id="emptyState" class="empty-state" aria-live="polite" aria-atomic="true">
+                    <div class="empty-icon">✨</div>
+                    <h2>No tasks yet</h2>
+                    <p>Create your first task to get started!</p>
+                </div>
+                <ul id="taskList" class="task-list"></ul>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>Built with ❤️ using GitHub Copilot</p>
+        </footer>
+    </div>
+
+    <!-- Help Overlay Modal -->
+    <div id="helpOverlay" class="help-overlay">
+        <div class="help-modal">
+            <button id="closeHelpBtn" class="help-close-btn" aria-label="Close help" title="Close (Esc)">✕</button>
+            <h2>Keyboard Shortcuts</h2>
+            <div class="help-content">
+                <div class="shortcut-item">
+                    <kbd class="shortcut-key">Ctrl + N</kbd>
+                    <span class="shortcut-description">Focus new task input</span>
+                </div>
+                <div class="shortcut-item">
+                    <kbd class="shortcut-key">Ctrl + F</kbd>
+                    <span class="shortcut-description">Focus search input</span>
+                </div>
+                <div class="shortcut-item">
+                    <kbd class="shortcut-key">Esc</kbd>
+                    <span class="shortcut-description">Clear all filters</span>
+                </div>
+                <div class="shortcut-item">
+                    <kbd class="shortcut-key">?</kbd>
+                    <span class="shortcut-description">Show this help overlay</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
